@@ -11,6 +11,7 @@ namespace StudentAppAD.Entity
         public int Id { get; set; }
         public string Name { get; set; }
         public List<Department> Departments { get; set; }
+        public List<Student> Students { get; set; }
 
         public Lecture() { }
         public Lecture(string name)
@@ -18,6 +19,7 @@ namespace StudentAppAD.Entity
             //Id = Id;
             Name = name;
             Departments = new List<Department>();
+            Students = new List<Student>();
         }
     }
 }

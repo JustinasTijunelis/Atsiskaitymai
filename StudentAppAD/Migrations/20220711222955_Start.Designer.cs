@@ -12,7 +12,7 @@ using StudentAppAD;
 namespace StudentAppAD.Migrations
 {
     [DbContext(typeof(StudentDBContext))]
-    [Migration("20220711215944_Start")]
+    [Migration("20220711222955_Start")]
     partial class Start
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,21 @@ namespace StudentAppAD.Migrations
                     b.HasIndex("LecturesId");
 
                     b.ToTable("DepartmentLecture");
+                });
+
+            modelBuilder.Entity("LectureStudent", b =>
+                {
+                    b.Property<int>("LectureId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LectureId", "StudentsId");
+
+                    b.HasIndex("StudentsId");
+
+                    b.ToTable("LectureStudent");
                 });
 
             modelBuilder.Entity("StudentAppAD.Entity.Department", b =>
@@ -68,12 +83,7 @@ namespace StudentAppAD.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("StudentId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
 
                     b.ToTable("Lectures");
                 });
@@ -126,11 +136,19 @@ namespace StudentAppAD.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("StudentAppAD.Entity.Lecture", b =>
+            modelBuilder.Entity("LectureStudent", b =>
                 {
+                    b.HasOne("StudentAppAD.Entity.Lecture", null)
+                        .WithMany()
+                        .HasForeignKey("LectureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("StudentAppAD.Entity.Student", null)
-                        .WithMany("Lecture")
-                        .HasForeignKey("StudentId");
+                        .WithMany()
+                        .HasForeignKey("StudentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("StudentAppAD.Entity.Student", b =>
@@ -147,11 +165,6 @@ namespace StudentAppAD.Migrations
             modelBuilder.Entity("StudentAppAD.Entity.Department", b =>
                 {
                     b.Navigation("Students");
-                });
-
-            modelBuilder.Entity("StudentAppAD.Entity.Student", b =>
-                {
-                    b.Navigation("Lecture");
                 });
 #pragma warning restore 612, 618
         }
