@@ -17,7 +17,7 @@ public static class Program
     {
         var systemService = new SystemService();
 
-        CreateLecture();
+        CreateStuden();
 
 
 
@@ -41,7 +41,11 @@ public static class Program
             Console.WriteLine("Iveskite Studento gimimo data - 1983-01-01");
             DateTime birthDate = Convert.ToDateTime(Console.ReadLine());
 
-            systemService.CreateStudent(firstName, lastName, gender, birthDate);
+            Console.WriteLine("Kuriam Departamentui priskirti");
+            //string departament = Console.ReadLine();
+            int departamentId = Convert.ToInt32(Console.ReadLine());
+
+            systemService.CreateStudent(firstName, lastName, gender, birthDate, departamentId);
         }
         void CreateLecture()
         {

@@ -14,6 +14,7 @@ namespace StudentAppAD.Entity
         public char Gender { get; set; }
         public DateTime BirthDate { get; set; }
         public List<Lecture> Lecture { get; set; }
+        
         public Department Department { get; set; }
 
         public Student() { }
