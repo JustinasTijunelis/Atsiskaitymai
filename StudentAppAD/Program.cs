@@ -17,7 +17,7 @@ public static class Program
     {
         var systemService = new SystemService();
 
-        CreateStuden();
+        CreateLecture();
 
 
 
