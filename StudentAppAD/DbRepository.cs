@@ -36,18 +36,62 @@ namespace StudentAppAD
         {
             _dbContext.Attach(department);
         }
-        public Student GetStudentById(int id) //paselektinti pagal ID
+
+        //Student
+        public Student GetStudentById(int studentId) //paselektinti pagal ID
         {
-            return _dbContext.Students.FirstOrDefault(d => d.Id == id);
+            return _dbContext.Students.FirstOrDefault(d => d.Id == studentId);
         }
-        public Student GetDepatmentById(int id) //paselektinti pagal ID
+        public List<Student> GetStudentByDepatmentId(int departmentId) //paselektinti pagal ID
         {
-            return _dbContext.Departments.FirstOrDefault(d => d.Id == id);
+            return _dbContext.Students.Include(d=> d.Department).Include(d=> d.Lecture).Where(d => d.Id == departmentId).ToList();
+        }
+        public List<Student> GetStudentsByDepartment(int departmentId)
+        {
+            return _dbContext.Students.Where(d=> d.Department.Id==departmentId).ToList();
+        }
+        public List<Student> GetAllStudents()
+        {
+            return _dbContext.Students.ToList();
+        }
+
+
+        //Lecture
+        public Lecture GetLectureByName(string lecture)
+        {
+            return _dbContext.Lectures.Include(l=> l.Students).FirstOrDefault(l=> l.Name.ToUpper()==lecture.ToUpper());
+        }
+        public List<Lecture> GetLecturesByStudentId(int studentId)
+        {
+            return _dbContext.Lectures.Where(l=> l.Students.Any(s=> s.Id==studentId)).ToList();
+        }
+        public Lecture GetLecturesById(int lectureId)
+        {
+            return _dbContext.Lectures.Include(l=> l.Departments).FirstOrDefault(l=> l.Id==lectureId);
+        }
+        public List<Lecture> GetLectureByDepartment(Department department)
+        {
+            return _dbContext.Lectures.Include(l=> l.Departments).Where(l=> l.Id==department.Id).ToList();
+        }
+        public List<Lecture> GetAllLecture()
+        {
+            return _dbContext.Lectures.ToList();
+        }
+
+
+        //Department
+        public Department GetDepartmentById(int departmentId)
+        {
+            return _dbContext.Departments.Include(d=> d.Lectures).FirstOrDefault(d=> d.Id==departmentId);
+        }
+        public Department GetDepartmentByName(string department)
+        {
+            return _dbContext.Departments.Include(d=> d.Lectures).FirstOrDefault(d=> d.Name.ToUpper() == department.ToUpper());
         }
 
         public void AddUpdateDepartment(Department department)
         {
-            if (_dbContext.Departments.Any(i => i.Name == department.Name))
+            if (_dbContext.Departments.Any(i => i.Name.ToUpper() == department.Name.ToUpper()))
             {
                 _dbContext.Departments.Update(department);
             }

@@ -17,7 +17,7 @@ public static class Program
     {
         var systemService = new SystemService();
 
-        CreateStuden();
+        //CreateStuden();
 
 
 
@@ -27,26 +27,26 @@ public static class Program
             string name = Console.ReadLine();
             systemService.CreateDepartment(name);
         }
-        void CreateStuden()
-        {
-            Console.WriteLine("Iveskite Studento varda - Vardenis");
-            string firstName = Console.ReadLine();
+        //void CreateStuden()
+        //{
+        //    Console.WriteLine("Iveskite Studento varda - Vardenis");
+        //    string firstName = Console.ReadLine();
 
-            Console.WriteLine("Iveskite Studento pavarde - Pavardenis");
-            string lastName = Console.ReadLine();
+        //    Console.WriteLine("Iveskite Studento pavarde - Pavardenis");
+        //    string lastName = Console.ReadLine();
 
-            Console.WriteLine("Iveskite Studento lyti - V/M");
-            Char gender = Convert.ToChar(Console.ReadLine().ToUpper());
+        //    Console.WriteLine("Iveskite Studento lyti - V/M");
+        //    Char gender = Convert.ToChar(Console.ReadLine().ToUpper());
 
-            Console.WriteLine("Iveskite Studento gimimo data - 1983-01-01");
-            DateTime birthDate = Convert.ToDateTime(Console.ReadLine());
+        //    Console.WriteLine("Iveskite Studento gimimo data - 1983-01-01");
+        //    DateTime birthDate = Convert.ToDateTime(Console.ReadLine());
 
-            Console.WriteLine("Kuriam Departamentui priskirti");
-            //string departament = Console.ReadLine();
-            int departamentId = Convert.ToInt32(Console.ReadLine());
+        //    Console.WriteLine("Kuriam Departamentui priskirti");
+        //    //string departament = Console.ReadLine();
+        //    int departamentId = Convert.ToInt32(Console.ReadLine());
 
-            systemService.CreateStudent(firstName, lastName, gender, birthDate, departamentId);
-        }
+        //    systemService.CreateStudent(firstName, lastName, gender, birthDate, departamentId);
+        //}
         void CreateLecture()
         {
             Console.WriteLine("Iveskite paskaita");

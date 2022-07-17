@@ -21,15 +21,15 @@ namespace StudentAppAD.StudentSystemBL
             _repository.AddDepartment(department);
             _repository.SaveChanges();
         }
-        public void CreateStudent(string firstName, string lastName, char gender, DateTime birthDate, int departmentId)
-        {
-            var student = new Student(firstName, lastName, gender, birthDate);
-            var departmentId = new Department(name);
+        //public void CreateStudent(string firstName, string lastName, char gender, DateTime birthDate, int departmentId)
+        //{
+        //    var student = new Student(firstName, lastName, gender, birthDate);
+        //    var departmentId = new Department(name);
            
-            _repository.AddUpdateDepartment(departmentId);
-            _repository.AddStudent(student);
-            _repository.SaveChanges();
-        }
+        //    _repository.AddUpdateDepartment(departmentId);
+        //    _repository.AddStudent(student);
+        //    _repository.SaveChanges();
+        //}
         public void CreateLecture(string name)
         {
             var lecture = new Lecture(name);
