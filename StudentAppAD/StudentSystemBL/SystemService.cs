@@ -21,6 +21,70 @@ namespace StudentAppAD.StudentSystemBL
             _repository.AddDepartment(department);
             _repository.SaveChanges();
         }
+        public void CreateLecture(string name)
+        {
+            var lecture = new Lecture(name);
+            _repository.AddLecture(lecture);
+            _repository.SaveChanges();
+        }
+        public void CreateStudent(string firstName, string lastName, char gender, DateTime birthDate, int departmentId, Department department)
+        {
+            
+            _repository.GetDepartmentById(department.Id);
+            var student = new Student(firstName, lastName, gender, birthDate,departmentId);
+            _repository.AddStudent(student);
+            _repository.SaveChanges();
+        }
+        public void TrasferStudentToDepartmentWithLecture(int studentId, int departmentId)
+        {
+            var student = _repository.GetStudentById(studentId);
+            var department = _repository.GetDepartmentById(departmentId);
+            var lectures = _repository.GetLectureByDepartmentId(departmentId); 
+
+            student.Lecture.Clear();
+            student.Department = department;
+            student.Lecture = lectures;
+            _repository.UpDateStudent(student);
+            _repository.SaveChanges();
+        }
+
+        public void AssignStudentAndLectureToDepartment(int studentId, int lectureId, string departmentName)
+        {
+            var student = _repository.GetStudentById(studentId);
+            var lecture = _repository.GetLecturesById(lectureId);
+            var department = _repository.GetDepartmentByName(departmentName);
+
+            department.Students.Add(student);
+            department.Lectures.Add(lecture);
+            _repository.UpDateDepatment(department);
+            _repository.SaveChanges();
+        }
+        public void AssigneLectureToDepartment(string lectureName, int departmentId)
+        {
+            var lecture = _repository.GetLectureByName(lectureName);
+            var department = _repository.GetDepartmentById(departmentId);
+
+            department.Lectures.Add(lecture);
+            _repository.UpDateDepatment(department);
+            _repository.SaveChanges();
+        }
+
+        //public void CreateStudentToDepartmentWithLecture(string firstName, string lastName, char gender, DateTime birthDate, Department department)
+        //{
+        //    var departmentLecture = _repository.GetLectureByDepartment(department);
+        //    var student = new Student(firstName, lastName, gender, birthDate);//(department,departmentLecture)
+        //    _repository.AddStudent(student);
+        //    _repository.SaveChanges();
+        //}
+
+        //public void CreateStudentToDepartment(string firstName, string lastName, char gender, DateTime birthDate, Department department)
+        //{
+        //    var student = new Student(firstName, lastName, gender, birthDate, department); //Sukurti Konstruktoriu su Department
+        //    _repository.AddStudent(student);
+        //    _repository.SaveChanges();
+        //}
+
+
         //public void CreateStudent(string firstName, string lastName, char gender, DateTime birthDate, int departmentId)
         //{
         //    var student = new Student(firstName, lastName, gender, birthDate);
@@ -30,14 +94,35 @@ namespace StudentAppAD.StudentSystemBL
         //    _repository.AddStudent(student);
         //    _repository.SaveChanges();
         //}
-        public void CreateLecture(string name)
+        
+        public void AssignStudentToDepartment(int departmentId, int studentId)
         {
-            var lecture = new Lecture(name);
-            _repository.AddLecture(lecture);
+            var department = _repository.GetDepartmentById(departmentId);
+            var student = _repository.GetStudentById(studentId);
+            department.Students.Add(student);
+            _repository.UpDateDepatment(department);
+            _repository.SaveChanges();
+        }
+
+        public void AssignLectureToDepartment(int departmentId, int lectureId)
+        {
+
+            var department = _repository.GetDepartmentById(departmentId);
+            var lecture = _repository.GetLecturesById(lectureId);
+            department.Lectures.Add(lecture);
+            _repository.UpDateDepatment(department);
             _repository.SaveChanges();
         }
 
 
+        public void AssignLectureToDepartment(string lecureName, int departmentId)
+        {
+            var lecture = _repository.GetLectureByName(lecureName);
+            var department = _repository.GetDepartmentById(departmentId);
+            department.Lectures.Add(lecture);
+            _repository.UpDateDepatment(department);
+            _repository.SaveChanges();
+        }
         //public void AssignDepartmentToLecture(int lectureId, string department)
         //{
         //    var lecture = _repository.GetLecture(lectureId);

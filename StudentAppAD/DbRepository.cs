@@ -16,6 +16,8 @@ namespace StudentAppAD
         {
             _dbContext = new StudentDBContext();
         }
+
+        //Add
         public void AddDepartment(Department department)
         {
             _dbContext.Departments.Add(department);
@@ -27,6 +29,12 @@ namespace StudentAppAD
         public void AddLecture(Lecture lecture)
         {
             _dbContext.Lectures.Add(lecture);
+        }
+
+        //Update
+        public void UpDateStudent(Student student) //Attach tai prijungti dar viena SITA Oblekta  Entity Framworko Change trackerio
+        {
+            _dbContext.Attach(student);
         }
         public void UpDateLecture(Lecture lecture) //Attach tai prijungti dar viena SITA Oblekta  Entity Framworko Change trackerio
         {
@@ -69,9 +77,13 @@ namespace StudentAppAD
         {
             return _dbContext.Lectures.Include(l=> l.Departments).FirstOrDefault(l=> l.Id==lectureId);
         }
-        public List<Lecture> GetLectureByDepartment(Department department)
+        public List<Lecture> GetLectureByDepartment(Department department)// gali veikti be include
         {
-            return _dbContext.Lectures.Include(l=> l.Departments).Where(l=> l.Id==department.Id).ToList();
+            return _dbContext.Lectures.Include(l=> l.Departments).Where(l=> l.Departments.Contains(department)).ToList();
+        }
+        public List<Lecture> GetLectureByDepartmentId(int departmentId) //gali veikti be include
+        {
+            return _dbContext.Lectures.Include(l => l.Departments).Where(l => l.Departments.Any(l=> l.Id== departmentId)).ToList();
         }
         public List<Lecture> GetAllLecture()
         {
@@ -88,7 +100,13 @@ namespace StudentAppAD
         {
             return _dbContext.Departments.Include(d=> d.Lectures).FirstOrDefault(d=> d.Name.ToUpper() == department.ToUpper());
         }
+        public List<Department> GetAllDepartment()
+        {
+            return _dbContext.Departments.ToList(); 
+        }
 
+
+        //Update 
         public void AddUpdateDepartment(Department department)
         {
             if (_dbContext.Departments.Any(i => i.Name.ToUpper() == department.Name.ToUpper()))
@@ -108,6 +126,7 @@ namespace StudentAppAD
             return _dbContext.Departments.FirstOrDefault(g => g.Name.ToUpper() == department.ToUpper());
             //graziname zanra is SQL pagal pavadinima  
         }
+
         public void SaveChanges()
         {
             _dbContext.SaveChanges();

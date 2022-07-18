@@ -1,4 +1,5 @@
 ﻿
+using StudentAppAD.Entity;
 using StudentAppAD.StudentSystemBL;
 
 
@@ -17,8 +18,8 @@ public static class Program
     {
         var systemService = new SystemService();
 
-        //CreateStuden();
-
+        AddStudentAndLecturesToDepartment();
+        //CreateLecture();
 
 
         void CreateDepartment()
@@ -27,31 +28,61 @@ public static class Program
             string name = Console.ReadLine();
             systemService.CreateDepartment(name);
         }
-        //void CreateStuden()
-        //{
-        //    Console.WriteLine("Iveskite Studento varda - Vardenis");
-        //    string firstName = Console.ReadLine();
+        int CreateStuden()
+        {
+            var department = new Department();
 
-        //    Console.WriteLine("Iveskite Studento pavarde - Pavardenis");
-        //    string lastName = Console.ReadLine();
+            Console.WriteLine("Iveskite Studento varda - Vardenis");
+            string firstName = Console.ReadLine();
 
-        //    Console.WriteLine("Iveskite Studento lyti - V/M");
-        //    Char gender = Convert.ToChar(Console.ReadLine().ToUpper());
+            Console.WriteLine("Iveskite Studento pavarde - Pavardenis");
+            string lastName = Console.ReadLine();
 
-        //    Console.WriteLine("Iveskite Studento gimimo data - 1983-01-01");
-        //    DateTime birthDate = Convert.ToDateTime(Console.ReadLine());
+            Console.WriteLine("Iveskite Studento lyti - V/M");
+            Char gender = Convert.ToChar(Console.ReadLine().ToUpper());
 
-        //    Console.WriteLine("Kuriam Departamentui priskirti");
-        //    //string departament = Console.ReadLine();
-        //    int departamentId = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Iveskite Studento gimimo data - 1983-01-01");
+            DateTime birthDate = Convert.ToDateTime(Console.ReadLine());
 
-        //    systemService.CreateStudent(firstName, lastName, gender, birthDate, departamentId);
-        //}
+            Console.WriteLine("Kuriam Departamentui priskirti");
+            //string department = Console.ReadLine();
+            int departamentId = Convert.ToInt32(Console.ReadLine());
+
+            systemService.CreateStudent(firstName, lastName, gender, birthDate, departamentId, department);
+            return departamentId;
+
+        }
         void CreateLecture()
         {
             Console.WriteLine("Iveskite paskaita");
             string name = Console.ReadLine();
             systemService.CreateLecture(name);
+        }
+        void CreatLectureAndAssignToDepartment()
+        {
+            Console.WriteLine("Iveskite paskaita");
+            string lectureName = Console.ReadLine();
+            systemService.CreateLecture(lectureName);
+            Console.WriteLine("Kuriam departamentui priskirti paskaita");
+            int departmentId = Convert.ToInt32(Console.ReadLine());
+            
+            systemService.AssignLectureToDepartment(lectureName, departmentId);
+        }
+        void CreatDepartmentAndAssignStudentLecrute(string name)
+        {
+
+        }
+        void AddStudentAndLecturesToDepartment() //2 uzduoties puse darbo
+        {
+            
+            var departmentId = CreateStuden();
+            Console.WriteLine("Koks studento Id");
+            var studentId = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Koks Paskaitos Id");
+            var lectureId = Convert.ToInt32(Console.ReadLine());
+            systemService.AssignStudentToDepartment(departmentId, studentId);
+            systemService.AssignLectureToDepartment(departmentId, lectureId);
+            
         }
     }
 }
