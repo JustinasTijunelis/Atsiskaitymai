@@ -68,7 +68,18 @@ namespace StudentAppAD.StudentSystemBL
             _repository.UpDateDepatment(department);
             _repository.SaveChanges();
         }
-
+         public List<Lecture> GetAllLecture()
+        {
+            return _repository.GetAllLecture();
+        }
+        public List<Student> GetAllStudents()
+        {
+            return _repository.GetAllStudents();
+        }
+        public List<Department> GetAllDepartment()
+        {
+            return _repository.GetAllDepartment();
+        }
         //public void CreateStudentToDepartmentWithLecture(string firstName, string lastName, char gender, DateTime birthDate, Department department)
         //{
         //    var departmentLecture = _repository.GetLectureByDepartment(department);
@@ -89,12 +100,12 @@ namespace StudentAppAD.StudentSystemBL
         //{
         //    var student = new Student(firstName, lastName, gender, birthDate);
         //    var departmentId = new Department(name);
-           
+
         //    _repository.AddUpdateDepartment(departmentId);
         //    _repository.AddStudent(student);
         //    _repository.SaveChanges();
         //}
-        
+
         public void AssignStudentToDepartment(int departmentId, int studentId)
         {
             var department = _repository.GetDepartmentById(departmentId);

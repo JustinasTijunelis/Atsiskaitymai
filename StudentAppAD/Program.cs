@@ -18,7 +18,9 @@ public static class Program
     {
         var systemService = new SystemService();
 
-        AddStudentAndLecturesToDepartment();
+        PrintLecture();
+        PrintStudent();
+        PrintDepartment();
         //CreateLecture();
 
 
@@ -45,6 +47,7 @@ public static class Program
             DateTime birthDate = Convert.ToDateTime(Console.ReadLine());
 
             Console.WriteLine("Kuriam Departamentui priskirti");
+            PrintDepartment();
             //string department = Console.ReadLine();
             int departamentId = Convert.ToInt32(Console.ReadLine());
 
@@ -52,11 +55,12 @@ public static class Program
             return departamentId;
 
         }
-        void CreateLecture()
+         string CreateLecture()
         {
             Console.WriteLine("Iveskite paskaita");
             string name = Console.ReadLine();
             systemService.CreateLecture(name);
+            return name;
         }
         void CreatLectureAndAssignToDepartment()
         {
@@ -64,6 +68,7 @@ public static class Program
             string lectureName = Console.ReadLine();
             systemService.CreateLecture(lectureName);
             Console.WriteLine("Kuriam departamentui priskirti paskaita");
+            PrintDepartment();
             int departmentId = Convert.ToInt32(Console.ReadLine());
             
             systemService.AssignLectureToDepartment(lectureName, departmentId);
@@ -77,12 +82,45 @@ public static class Program
             
             var departmentId = CreateStuden();
             Console.WriteLine("Koks studento Id");
+            PrintStudent();
             var studentId = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Koks Paskaitos Id");
+            PrintLecture();
             var lectureId = Convert.ToInt32(Console.ReadLine());
             systemService.AssignStudentToDepartment(departmentId, studentId);
             systemService.AssignLectureToDepartment(departmentId, lectureId);
             
+        }
+        void CreatLectureAndAssigneToDepartemnt()  //3 uzduotis
+        {
+           var lectureName=  CreateLecture();
+            Console.WriteLine("Pasirinkite departamenta");
+            PrintDepartment();
+            var departmentId = Convert.ToInt32(Console.ReadLine());
+            systemService.AssigneLectureToDepartment(lectureName, departmentId);
+             
+        }
+        void PrintLecture()
+        {
+            Console.WriteLine("Paskaitos");
+            var lectures = systemService.GetAllLecture();
+            foreach (var lecture in lectures) { Console.WriteLine($"[{lecture.Id}] {lecture.Name}"); }
+           
+        }
+        void PrintStudent()
+        {
+            Console.WriteLine("Studentia");
+            var students = systemService.GetAllStudents();
+            foreach (var student in students) { Console.WriteLine($"[{student.Id}] " +
+                $"{student.FirstName} {student.LastName} {student.Gender} {student.BirthDate}"); }
+
+        }
+        void PrintDepartment()
+        {
+            Console.WriteLine("Departamentai");
+            var departments = systemService.GetAllDepartment();
+            foreach (var department in departments) { Console.WriteLine($"[{department.Id}] {department.Name}"); }
+
         }
     }
 }
