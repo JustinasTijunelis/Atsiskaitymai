@@ -18,7 +18,7 @@ namespace StudentAppAD.Entity
         public Department? Department { get; set; }
 
         public Student() { }
-        public Student(string firstName, string lastName, char gender, DateTime birthDate, int departmentId)
+        public Student(string firstName, string lastName, char gender, DateTime birthDate, int department)
         {
 
             FirstName = firstName;
@@ -26,7 +26,28 @@ namespace StudentAppAD.Entity
             Gender = gender;
             BirthDate = birthDate;
             Lecture = new List<Lecture>();
-            DepartmentId = departmentId;
+            DepartmentId = department;
+        }
+        public Student(string firstName, string lastName, char gender, DateTime birthDate, Department department)
+        {
+
+            FirstName = firstName;
+            LastName = lastName;
+            Gender = gender;
+            BirthDate = birthDate;
+            Lecture = new List<Lecture>();
+            Department = department;
+        }
+        public Student(string firstName, string lastName, char gender, DateTime birthDate, Department department,
+            List<Lecture> lecture)
+        {
+
+            FirstName = firstName;
+            LastName = lastName;
+            Gender = gender;
+            BirthDate = birthDate;
+            Lecture = lecture;
+            Department = department;
         }
     }
 }
