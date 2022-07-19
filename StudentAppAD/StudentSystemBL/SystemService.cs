@@ -57,6 +57,7 @@ namespace StudentAppAD.StudentSystemBL
             department.Students.Add(student);
             department.Lectures.Add(lecture);
             _repository.UpDateDepatment(department);
+
             _repository.SaveChanges();
         }
         public void AssigneLectureToDepartment(string lectureName, int departmentId)
