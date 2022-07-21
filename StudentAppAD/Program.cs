@@ -36,7 +36,8 @@ public static class Program
             
             systemService.AssignLectureToDepartment(lectureName, departmentId);
         }
-        void CreatDepartmentAndAssignStudentLecrute()  // 1 Uzduoti
+        void CreatDepartmentAndAssignStudentLecrute()  // 1 Uzduoti  neprideda i departamenta studentu bei paskaitu, nulai gaunasi 
+                                                       // tikriausiai i problema su konstruktoriumi ir negali uzsisetinti 
         {
             var departmentName = CreateDepartment();
             //Console.WriteLine("Pasirinkite Departamenta i kuri norite prideti Studentus ir Paskaitas");
@@ -101,7 +102,7 @@ public static class Program
             //string department = Console.ReadLine();
             int departamentId = Convert.ToInt32(Console.ReadLine());
 
-            systemService.CreateStudent(firstName, lastName, gender, birthDate, departamentId, department);
+            systemService.CreateStudent(firstName, lastName, gender, birthDate, department);
             return departamentId;
         }
         string CreateLecture()

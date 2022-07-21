@@ -27,11 +27,11 @@ namespace StudentAppAD.StudentSystemBL
             _repository.AddLecture(lecture);
             _repository.SaveChanges();
         }
-        public void CreateStudent(string firstName, string lastName, char gender, DateTime birthDate, int departmentId, Department department)
+        public void CreateStudent(string firstName, string lastName, char gender, DateTime birthDate, Department department)
         {
             
             _repository.GetDepartmentById(department.Id);
-            var student = new Student(firstName, lastName, gender, birthDate,departmentId);
+            var student = new Student(firstName, lastName, gender, birthDate);
             _repository.AddStudent(student);
             _repository.SaveChanges();
         }

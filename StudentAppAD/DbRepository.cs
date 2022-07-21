@@ -77,13 +77,13 @@ namespace StudentAppAD
         {
             return _dbContext.Lectures.Include(l=> l.Departments).FirstOrDefault(l=> l.Id==lectureId);
         }
-        public List<Lecture> GetLectureByDepartment(Department department)// gali veikti be include
+        public List<Lecture> GetLectureByDepartment(Department department)// gali veikti be include Include(l=> l.Departments)
         {
-            return _dbContext.Lectures.Include(l=> l.Departments).Where(l=> l.Departments.Contains(department)).ToList();
+            return _dbContext.Lectures.Where(l=> l.Departments.Contains(department)).ToList();
         }
-        public List<Lecture> GetLectureByDepartmentId(int departmentId) //gali veikti be include
+        public List<Lecture> GetLectureByDepartmentId(int departmentId) //gali veikti be include 
         {
-            return _dbContext.Lectures.Include(l => l.Departments).Where(l => l.Departments.Any(l=> l.Id== departmentId)).ToList();
+            return _dbContext.Lectures.Where(l => l.Departments.Any(l=> l.Id== departmentId)).ToList();
         }
         public List<Lecture> GetAllLecture()
         {
@@ -96,9 +96,9 @@ namespace StudentAppAD
         {
             return _dbContext.Departments.Include(d=> d.Lectures).FirstOrDefault(d=> d.Id==departmentId);
         }
-        public Department GetDepartmentByName(string department)
+        public Department GetDepartmentByName(string department) //.Include(d=> d.Lectures)
         {
-            return _dbContext.Departments.Include(d=> d.Lectures).FirstOrDefault(d=> d.Name.ToUpper() == department.ToUpper());
+            return _dbContext.Departments.FirstOrDefault(d=> d.Name.ToUpper() == department.ToUpper());
         }
         public List<Department> GetAllDepartment()
         {

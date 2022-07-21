@@ -14,11 +14,11 @@ namespace StudentAppAD.Entity
         public char Gender { get; set; }
         public DateTime BirthDate { get; set; }
         public List<Lecture> Lecture { get; set; }
-        public int DepartmentId { get; set; }
+       // public int DepartmentId { get; set; }
         public Department? Department { get; set; }
 
         public Student() { }
-        public Student(string firstName, string lastName, char gender, DateTime birthDate, int department)
+        public Student(string firstName, string lastName, char gender, DateTime birthDate)
         {
 
             FirstName = firstName;
@@ -26,7 +26,7 @@ namespace StudentAppAD.Entity
             Gender = gender;
             BirthDate = birthDate;
             Lecture = new List<Lecture>();
-            DepartmentId = department;
+            
         }
         public Student(string firstName, string lastName, char gender, DateTime birthDate, Department department)
         {
@@ -38,7 +38,7 @@ namespace StudentAppAD.Entity
             Lecture = new List<Lecture>();
             Department = department;
         }
-        public Student(string firstName, string lastName, char gender, DateTime birthDate, Department department,
+        public Student( string firstName, string lastName, char gender, DateTime birthDate, Department department,
             List<Lecture> lecture)
         {
 
