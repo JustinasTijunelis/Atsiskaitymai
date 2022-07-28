@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace StudentAppAD.Entity
 {
@@ -14,23 +10,20 @@ namespace StudentAppAD.Entity
         public char Gender { get; set; }
         public DateTime BirthDate { get; set; }
         public List<Lecture> Lecture { get; set; }
-       // public int DepartmentId { get; set; }
+        public int DepartmentId { get; set; }
         public Department? Department { get; set; }
 
         public Student() { }
         public Student(string firstName, string lastName, char gender, DateTime birthDate)
         {
-
             FirstName = firstName;
             LastName = lastName;
             Gender = gender;
             BirthDate = birthDate;
             Lecture = new List<Lecture>();
-            
         }
         public Student(string firstName, string lastName, char gender, DateTime birthDate, Department department)
         {
-
             FirstName = firstName;
             LastName = lastName;
             Gender = gender;
@@ -41,7 +34,6 @@ namespace StudentAppAD.Entity
         public Student( string firstName, string lastName, char gender, DateTime birthDate, Department department,
             List<Lecture> lecture)
         {
-
             FirstName = firstName;
             LastName = lastName;
             Gender = gender;

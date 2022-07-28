@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentAppAD.Entity;
-using StudentAppAD.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace StudentAppAD
 {
@@ -17,7 +12,7 @@ namespace StudentAppAD
             _dbContext = new StudentDBContext();
         }
 
-        //Add
+        #region Add
         public void AddDepartment(Department department)
         {
             _dbContext.Departments.Add(department);
@@ -30,8 +25,8 @@ namespace StudentAppAD
         {
             _dbContext.Lectures.Add(lecture);
         }
-
-        //Update
+        #endregion
+        #region Update
         public void UpDateStudent(Student student) //Attach tai prijungti dar viena SITA Oblekta  Entity Framworko Change trackerio
         {
             _dbContext.Attach(student);
@@ -44,11 +39,11 @@ namespace StudentAppAD
         {
             _dbContext.Attach(department);
         }
-
-        //Student
+        #endregion
+        #region Student
         public Student GetStudentById(int studentId) //paselektinti pagal ID
         {
-            return _dbContext.Students.FirstOrDefault(d => d.Id == studentId);
+            return _dbContext.Students.Include(d=> d.Lecture).Include(d=> d.Department).FirstOrDefault(d => d.Id == studentId);
         }
         public List<Student> GetStudentByDepatmentId(int departmentId) //paselektinti pagal ID
         {
@@ -62,9 +57,8 @@ namespace StudentAppAD
         {
             return _dbContext.Students.ToList();
         }
-
-
-        //Lecture
+        #endregion
+        #region Lecture
         public Lecture GetLectureByName(string lecture)
         {
             return _dbContext.Lectures.Include(l=> l.Students).FirstOrDefault(l=> l.Name.ToUpper()==lecture.ToUpper());
@@ -81,6 +75,10 @@ namespace StudentAppAD
         {
             return _dbContext.Lectures.Where(l=> l.Departments.Contains(department)).ToList();
         }
+        public List<Lecture> GetLectureByDepartmentId2(int departmentId)
+        {
+            return _dbContext.Lectures.Include(l=> l.Departments).Where(d => d.Id == departmentId).ToList();
+        }
         public List<Lecture> GetLectureByDepartmentId(int departmentId) //gali veikti be include 
         {
             return _dbContext.Lectures.Where(l => l.Departments.Any(l=> l.Id== departmentId)).ToList();
@@ -89,24 +87,22 @@ namespace StudentAppAD
         {
             return _dbContext.Lectures.ToList();
         }
-
-
-        //Department
+        #endregion
+        #region Department
         public Department GetDepartmentById(int departmentId)
         {
-            return _dbContext.Departments.Include(d=> d.Lectures).FirstOrDefault(d=> d.Id==departmentId);
+            return _dbContext.Departments.Include(d=> d.Lectures).Include(d=>d.Students).FirstOrDefault(d=> d.Id==departmentId);
         }
         public Department GetDepartmentByName(string department) //.Include(d=> d.Lectures)
         {
-            return _dbContext.Departments.FirstOrDefault(d=> d.Name.ToUpper() == department.ToUpper());
+            return _dbContext.Departments.Include(d=>d.Lectures).Include(d=>d.Students).FirstOrDefault(d=> d.Name.ToUpper() == department.ToUpper());
         }
         public List<Department> GetAllDepartment()
         {
             return _dbContext.Departments.ToList(); 
         }
-
-
-        //Update 
+        #endregion
+        #region Update
         public void AddUpdateDepartment(Department department)
         {
             if (_dbContext.Departments.Any(i => i.Name.ToUpper() == department.Name.ToUpper()))
@@ -126,7 +122,7 @@ namespace StudentAppAD
             return _dbContext.Departments.FirstOrDefault(g => g.Name.ToUpper() == department.ToUpper());
             //graziname zanra is SQL pagal pavadinima  
         }
-
+        #endregion
         public void SaveChanges()
         {
             _dbContext.SaveChanges();

@@ -1,9 +1,4 @@
-﻿using StudentAppAD.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace StudentAppAD.Entity
 {
@@ -17,7 +12,6 @@ namespace StudentAppAD.Entity
         public Department() { }
         public Department(string name)
         {
-            
             Name = name;
             Students = new List<Student>();
             Lectures = new List<Lecture>();
