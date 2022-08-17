@@ -56,3 +56,10 @@ C:\Users\User\Documents\GitHub\Atsiskaitymai\StudentAppAD\obj\Debug\net6.0\Stude
 C:\Users\User\Documents\GitHub\Atsiskaitymai\StudentAppAD\obj\Debug\net6.0\ref\StudentAppAD.dll
 C:\Users\User\Documents\GitHub\Atsiskaitymai\StudentAppAD\obj\Debug\net6.0\StudentAppAD.pdb
 C:\Users\User\Documents\GitHub\Atsiskaitymai\StudentAppAD\obj\Debug\net6.0\StudentAppAD.genruntimeconfig.cache
+C:\Users\User\Documents\GitHub\Atsiskaitymai\StudentAppAD\bin\Debug\net6.0\NUnit3.TestAdapter.dll
+C:\Users\User\Documents\GitHub\Atsiskaitymai\StudentAppAD\bin\Debug\net6.0\NUnit3.TestAdapter.pdb
+C:\Users\User\Documents\GitHub\Atsiskaitymai\StudentAppAD\bin\Debug\net6.0\nunit.engine.dll
+C:\Users\User\Documents\GitHub\Atsiskaitymai\StudentAppAD\bin\Debug\net6.0\nunit.engine.api.dll
+C:\Users\User\Documents\GitHub\Atsiskaitymai\StudentAppAD\bin\Debug\net6.0\nunit.engine.core.dll
+C:\Users\User\Documents\GitHub\Atsiskaitymai\StudentAppAD\bin\Debug\net6.0\testcentric.engine.metadata.dll
+C:\Users\User\Documents\GitHub\Atsiskaitymai\StudentAppAD\bin\Debug\net6.0\nunit.framework.dll
