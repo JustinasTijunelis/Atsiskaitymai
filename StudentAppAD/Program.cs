@@ -37,13 +37,15 @@ public static class Program
             Console.WriteLine("Pasirinkite studenta");
             PrintStudent();
             var studentId = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Pasirinkite pridedama paskaita");
-            PrintLecture();
-            var lectureId = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Pasirinkite i kuri departamenta norite prideti");
+
+            Console.WriteLine("Pasirinkite departamenta");
             PrintDepartment();
-            var departmentId = Convert.ToInt32(Console.ReadLine());
-            systemService.AssignStudentAndLectureToDepartment(studentId, lectureId, departmentId);
+            var departmanetId = Convert.ToInt32(Console.ReadLine());
+            var lectures = systemService.GetAllLecturesByDepartmentId(departmanetId);
+            foreach (var lecture in lectures) { Console.WriteLine($"[{lecture.Id}] {lecture.Name}"); }
+            Console.WriteLine("Pasirinkite paskaita");
+            var lectureId = Convert.ToInt32(Console.ReadLine());
+            systemService.AssignStudentAndLectureToDepartment(studentId, lectureId, departmanetId);
             MeniuStart();
         }
         void CreatLectureAndAssigneToDepartemnt()  //3 uzduotis
@@ -53,6 +55,7 @@ public static class Program
             PrintDepartment();
             var departmentId = Convert.ToInt32(Console.ReadLine());
             systemService.AssignLectureToDepartment(departmentId, lectureId);
+            MeniuStart();
         }
         void CreateAddStudentAndLecturesToDepartment() //4 uzduotis
         {
@@ -67,7 +70,7 @@ public static class Program
             systemService.AssignLectureToDepartment(departmentId, lectureId);
             MeniuStart();
         }
-       void MoveStudentToDepartment() //5 uzduoti
+        void MoveStudentToDepartment() //5 uzduoti
         {
             Console.WriteLine("Koks studento Id");
             PrintStudent();
@@ -167,6 +170,15 @@ public static class Program
             var lectures = systemService.GetAllLecture();
             foreach (var lecture in lectures) { Console.WriteLine($"[{lecture.Id}] {lecture.Name}"); }
         }
+        //void PrintLectureByDepartment()
+        //{
+        //    Console.WriteLine("Pasirinkite Departamenta");
+        //    PrintDepartment();
+        //    var department = Console.ReadLine();
+        //    Console.WriteLine("Departamento paskaitos");
+        //    var departmentLectures = systemService.GetAllLecturesByDepartmentId(department);
+        //    foreach (var departmentLecture in departmentLectures) { Console.WriteLine(departmentLecture.Id) {lecture.Name}; } 
+        //}
         void PrintStudent()
         {
             Console.WriteLine("Studentia");

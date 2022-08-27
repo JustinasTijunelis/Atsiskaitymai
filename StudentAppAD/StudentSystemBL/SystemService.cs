@@ -90,7 +90,7 @@ namespace StudentAppAD.StudentSystemBL
         }
         public List<Lecture> GetAllLecturesByDepartmentId(int departmentId)
         {
-            return _repository.GetLectureByDepartmentId2(departmentId).ToList();
+            return _repository.GetLectureByDepartmentId(departmentId).ToList();
         }
         public List<Lecture> GetAllLecturesByStudentId(int studentId)
         {
